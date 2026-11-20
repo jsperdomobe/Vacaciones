@@ -1,24 +1,24 @@
-# Vacaciones · Calendario del equipo
+# Tiempo fuera — Vacaciones del equipo
 
-Aplicación compartida para diciembre de 2026 a diciembre de 2027. Frontend HTML/CSS/JS en GitHub Pages, autenticación y datos en Supabase con RLS.
+Aplicación conectada a Supabase y diseñada para publicarse como sitio estático en GitHub Pages.
 
-## Configuración
-- GitHub Pages: Settings > Pages > Deploy from a branch > main > /(root).
-- Supabase Auth: Configuration > URL Configuration. **Site URL** y **Redirect URL**: `https://jsperdomobe.github.io/Vacaciones/`.
-- En Supabase Auth habilitar correo/magic links. En el primer ingreso, la cuenta de supervisor debe usar el correo corporativo ya configurado en la base.
-- Los demás usuarios solicitan vincular su correo a uno de los nombres de la lista y el supervisor aprueba desde la pestaña Supervisión.
-- No introducir claves secret/service_role en `config.js`.
+## Accesos
+- **Equipo (selecciona nombre, sin cuenta):** https://jsperdomobe.github.io/Vacaciones/
+- **Jefe (solo visualizador):** https://jsperdomobe.github.io/Vacaciones/?modo=visor
+- **Supervisor (inicio de sesión):** https://jsperdomobe.github.io/Vacaciones/?modo=supervisor
 
-## Reglas
-- Los saldos se cargan manualmente desde Success; esta app no reemplaza el trámite oficial.
-- Las solicitudes pendientes y aprobadas reservan saldo.
-- Vacaciones: lunes a viernes menos festivos colombianos.
-- Medios días y pasantes: bolsas independientes, año calendario, y comprobación de saldo en el servidor.
-- El comodín del 24 o 31 de diciembre reemplaza un día de descuento si coincide con vacaciones.
+## Funciones
+- Calendario diciembre 2026 — diciembre 2027.
+- Solicitudes sin credenciales: selecciona el nombre, fechas y tipo de ausencia. **Siempre quedan pendientes de aprobación.**
+- Consulta de personas y ausencias aprobadas o pendientes.
+- Comodín 24 o 31 de diciembre por año, una elección por persona; supervisor puede corregir.
+- Panel protegido para aprobar, rechazar y editar saldos de Success, antigüedad y medios días adicionales.
+- Solo se descuentan días hábiles lunes-viernes, excluyendo festivos de Colombia.
 
-**Privacidad:** no compartir detalles laborales sin revisión y autorización de la empresa. El repositorio público no contiene los nombres o saldos de personas; los datos están en Supabase con acceso controlado.
-
-## Acceso inicial sin SMTP (alternativa segura)
-Mientras se configura un proveedor de correos, el dueño de Supabase puede crear las cuentas en **Authentication > Users > Add user > Create new user**, marcar confirmación de correo solo para cuentas verificadas personalmente y asignar una contraseña temporal diferente para cada integrante. Compártela por un canal privado. Entra en la aplicación con «Entrar con contraseña» y cambia la contraseña desde el menú lateral.
-
-**No desactivar Confirm email globalmente**: permitir cuentas autoconfirmadas creadas por cualquiera podría facilitar una suplantación. Para inicio de sesión mediante enlace a correos corporativos, configurar previamente SMTP propio.
+## Precauciones
+- **El enlace es público:** cualquiera con él puede ver nombres y fechas de ausencias y puede enviar una solicitud en nombre de otra persona. No hay verificación de identidad para el equipo. El supervisor debe verificar antes de aprobar; la plataforma no genera permisos automáticamente.
+- La vista abierta no publica saldos de Success, correos ni observaciones privadas.
+- La cuenta de supervisor sí requiere autenticación individual.
+- Antes de compartir externamente, confirma la autorización corporativa para el tratamiento de esta información. Si se requiere control de acceso, reactivar un inicio de sesión o colocar el sitio detrás de una pasarela de acceso.
+- Nunca subir contraseñas ni claves service_role a GitHub; solo una clave publishable está en config.js.
+- Si GitHub Pages muestra 404, ir a Settings → Pages y pulsar **Save** tras seleccionar `main` / `(root)`.
