@@ -1,0 +1,2 @@
+// Clave publicable de Supabase (no es una clave de servicio ni secreta).
+window.TIEMPO_FUERA_CONFIG = { supabaseUrl: 'https://ylrjlyxregglrsmhrvkp.supabase.co', supabaseAnonKey: 'sb_publishable_erIxKxpPtUw-bFW4QzBMjA_3lWVMDJ1', requireBackend: true };
