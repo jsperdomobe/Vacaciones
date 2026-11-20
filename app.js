@@ -427,7 +427,7 @@ document.addEventListener('change',e=>{
  else if(['reqType','reqMember','reqStart','reqEnd'].includes(e.target.id))updateRequestForm();
 });
 document.addEventListener('submit',async e=>{
- const f=e.target;if(!['requestForm','loginForm','claimForm','initialSuccessForm'].includes(f.id)&&!f.classList.contains('member-edit-form'))return;
+ const f=e.target;if(!['requestForm','loginForm','passwordForm','passwordChangeForm','claimForm','initialSuccessForm'].includes(f.id)&&!f.classList.contains('member-edit-form'))return;
  e.preventDefault();const btn=f.querySelector('button[type=submit]');if(btn)btn.disabled=true;
  try{
   if(f.id==='initialSuccessForm')await saveInitialSuccess(f);
@@ -436,6 +436,18 @@ document.addEventListener('submit',async e=>{
    const email=el('loginEmail').value.trim();
    await ensureResult(db.auth.signInWithOtp({email,options:{emailRedirectTo:location.origin+location.pathname}}));
    el('loginFeedback').textContent='Revisa tu correo para abrir el enlace de ingreso. Puede tardar unos minutos.';
+  }
+  else if(f.id==='passwordForm'){
+   const obj=Object.fromEntries(new FormData(f));
+   await ensureResult(db.auth.signInWithPassword({email:String(obj.email).trim(),password:obj.password}));
+   await reloadLive();
+  }
+  else if(f.id==='passwordChangeForm'){
+   const obj=Object.fromEntries(new FormData(f));
+   if(obj.password!==obj.confirm_password)throw Error('Las contraseñas no coinciden');
+   if(String(obj.password).length<12)throw Error('La contraseña debe tener al menos 12 caracteres');
+   await ensureResult(db.auth.updateUser({password:obj.password}));
+   closeModal();toast('Contraseña actualizada.');
   }
   else if(f.id==='claimForm'){
    await ensureResult(db.rpc('request_team_access',{p_member_id:el('claimMember').value}));
@@ -446,6 +458,7 @@ document.addEventListener('submit',async e=>{
 });
 document.querySelectorAll('[data-view]').forEach(b=>b.addEventListener('click',()=>setView(b.dataset.view)));
 el('logoutBtn').addEventListener('click',()=>logout().catch(err=>toast(err.message,true)));
+el('changePwdBtn').addEventListener('click',()=>modal(`<div class="eyebrow">SEGURIDAD</div><h2 id="modalTitle">Cambiar mi contraseña</h2><p class="modal-intro">Recomendamos cambiar la contraseña temporal recibida del supervisor por una nueva y personal.</p><form id="passwordChangeForm" class="stack-form"><label>Nueva contraseña</label><input name="password" type="password" minlength="12" autocomplete="new-password" required><label>Confirmar contraseña</label><input name="confirm_password" type="password" minlength="12" autocomplete="new-password" required><button class="primary full" type="submit">Actualizar contraseña</button></form>`));
 el('modalClose').addEventListener('click',closeModal);
 el('modalLayer').addEventListener('click',e=>{if(e.target===el('modalLayer'))closeModal()});
 document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
