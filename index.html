@@ -27,6 +27,14 @@
             <button class="primary full" type="submit">Enviarme el enlace de acceso <span>↗</span></button>
           </form>
           <p id="loginFeedback" class="feedback"></p>
+          <div class="auth-alt"><span>O utiliza tu contraseña</span></div>
+          <form id="passwordForm" class="stack-form" autocomplete="on">
+            <label>Correo electrónico</label>
+            <input name="email" type="email" placeholder="tu.correo@empresa.com" autocomplete="username" required>
+            <label>Contraseña</label>
+            <input name="password" type="password" placeholder="Contraseña que te entregó el supervisor" autocomplete="current-password" required>
+            <button class="outline full" type="submit">Entrar con contraseña</button>
+          </form>
           <p class="small muted">El supervisor debe habilitar tu correo en la lista del equipo. Los datos se guardan en una base de datos privada.</p>
         </div>
       </div>
@@ -48,6 +56,7 @@
             <label for="demoAs">Ver como (demo)</label>
             <select id="demoAs"></select>
           </div>
+          <button id="changePwdBtn" class="logout">◈ Cambiar mi contraseña</button>
           <button id="logoutBtn" class="logout">↪ <span id="logoutLabel">Cerrar sesión</span></button>
         </div>
       </aside>
