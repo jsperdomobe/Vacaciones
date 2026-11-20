@@ -4,3 +4,6 @@
 
 /* Compromisos de antigüedad informados fuera de la app */
 .event.seniority{background:#ede7fa;color:#5b4884}.admin-note{grid-column:1/-2}.admin-note textarea{width:100%;min-height:55px;padding:9px;border:1px solid #dfe7eb;border-radius:7px;resize:vertical}@media(max-width:900px){.admin-note{grid-column:auto}}
+
+.auth-alt{display:flex;align-items:center;gap:12px;margin:22px 0 16px;color:#687f8e;font-size:12px;font-weight:700}.auth-alt::before,.auth-alt::after{content:"";flex:1;height:1px;background:#e0e8ec}
+.auth-box .stack-form input[type="password"]{width:100%}
