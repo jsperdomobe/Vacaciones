@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#102a43">
+  <title>Tiempo fuera · Planeación de equipo</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div id="app">
+    <section id="authScreen" class="auth-screen hidden">
+      <div class="auth-art">
+        <span class="eyebrow light">PLANEACIÓN DEL EQUIPO</span>
+        <h1>Organizar el descanso también es cuidar la operación.</h1>
+        <p>Un solo lugar para coordinar vacaciones, medios días y la cobertura del equipo.</p>
+        <div class="auth-date">DIC 2026 <span>—</span> DIC 2027</div>
+      </div>
+      <div class="auth-form-panel">
+        <div class="auth-box">
+          <div class="logo"><span class="logo-mark">✳</span><span>Tiempo <b>fuera</b></span></div>
+          <h2>Ingresa al calendario</h2>
+          <p class="muted">Utiliza el correo autorizado para recibir un enlace de acceso. No necesitas contraseña.</p>
+          <form id="loginForm" class="stack-form">
+            <label>Correo electrónico</label>
+            <input id="loginEmail" type="email" placeholder="nombre@empresa.com" autocomplete="email" required>
+            <button class="primary full" type="submit">Enviarme el enlace de acceso <span>↗</span></button>
+          </form>
+          <p id="loginFeedback" class="feedback"></p>
+          <p class="small muted">El supervisor debe habilitar tu correo en la lista del equipo. Los datos se guardan en una base de datos privada.</p>
+        </div>
+      </div>
+    </section>
+
+    <div id="workspace" class="workspace hidden">
+      <aside class="sidebar">
+        <div class="logo"><span class="logo-mark">✳</span><span>Tiempo <b>fuera</b></span></div>
+        <div class="side-label">PLANIFICACIÓN</div>
+        <nav class="side-nav" aria-label="Navegación principal">
+          <button data-view="calendar" class="nav-item active"><span class="nav-icon">▦</span> Calendario <span class="nav-trail">›</span></button>
+          <button data-view="control" class="nav-item"><span class="nav-icon">▤</span> Control del equipo</button>
+          <button data-view="mine" class="nav-item"><span class="nav-icon">◷</span> Mis solicitudes</button>
+          <button data-view="supervisor" class="nav-item" id="supervisorNav"><span class="nav-icon">⚑</span> Supervisión <span class="nav-dot" id="navPendingDot"></span></button>
+        </nav>
+        <div class="side-bottom">
+          <div class="period-info"><span class="mini-icon">◉</span><div><b>Periodo de planeación</b><small>Dic 2026 – Dic 2027</small></div></div>
+          <div id="demoSwitcher" class="demo-switch hidden">
+            <label for="demoAs">Ver como (demo)</label>
+            <select id="demoAs"></select>
+          </div>
+          <button id="logoutBtn" class="logout">↪ <span id="logoutLabel">Cerrar sesión</span></button>
+        </div>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <div><span class="breadcrumb">DESARROLLO DE OPERACIONES <span> / </span> <span id="breadcrumbView">Calendario</span></span></div>
+          <div class="topbar-right"><span id="modeTag" class="mode-tag hidden">MODO DEMOSTRACIÓN · LOCAL</span><span id="userAvatar" class="avatar">JS</span><span id="userName" class="user-name"></span></div>
+        </header>
+        <div id="pageContent" class="page-content"></div>
+      </main>
+    </div>
+  </div>
+
+  <div id="modalLayer" class="modal-layer hidden" role="presentation">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" id="modalClose" aria-label="Cerrar">×</button>
+      <div id="modalContent"></div>
+    </div>
+  </div>
+  <div id="toast" class="toast hidden" role="status"></div>
+  <script src="./config.js"></script>
+  <script defer src="./app.js"></script>
+</body>
+</html>
